@@ -23,6 +23,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Employe implements Serializable {
+	private static final long serialVersionUID = -1396669830860400871L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
 	@JsonIgnore
 	//@JsonBackReference
 	@OneToOne(mappedBy="employe")
