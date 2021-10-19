@@ -16,12 +16,6 @@ import tn.esprit.spring.services.IEmployeService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class EmployeTest {
-@Autowired
-IEmployeService IEmpService;
 
-@Test
-public void getAllEmployees()
-{
-	assertNotNull(IEmpService.getAllEmployes());
-}
+
 }
