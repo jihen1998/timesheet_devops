@@ -4,6 +4,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 log4j.properties
+Contrat.txt
 application.properties
 ### STS ###
 .apt_generated
