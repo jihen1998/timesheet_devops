@@ -1,49 +1,109 @@
 package tn.esprit.spring.services;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+
 import tn.esprit.spring.entities.Contrat;
-import tn.esprit.spring.exception.ContratNotFoundException;
+import tn.esprit.spring.entities.Departement;
+import tn.esprit.spring.entities.Employe;
+
+
 import tn.esprit.spring.repository.ContratRepository;
+
+import tn.esprit.spring.repository.EmployeRepository;
+
 @Service
 public class EmployeServiceImpl implements IEmployeService {
 
+	@Autowired
+	EmployeRepository employeRepository;
 	
 	@Autowired
 	ContratRepository contratRepoistory;
-	
-    private static final Logger logger = LogManager.getLogger(EmployeServiceImpl.class);
-	
-	public int ajouterContrat(Contrat contrat) {
-		   logger.info("debut ajout");	  
-		   try{	 contratRepoistory.save(contrat);
-				 logger.info("l'ajout est realise avec succés");
-			   		}
-			   catch(Exception e){
-					logger.error("erreur d'ajout");}
-		return contrat.getReference();
+	//SIWAR
+	public int ajouterEmploye(Employe employe) {
+		employeRepository.save(employe);
+		return employe.getId();
+	}
+
+	public void mettreAjourEmailByEmployeId(String email, int employeId) {
+		Employe employe = employeRepository.findById(employeId).get();
+		employe.setEmail(email);
+		employeRepository.save(employe);
+
+	}
+    public String getEmployePrenomById(int employeId) {
+		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+		return employeManagedEntity.getPrenom();
+	}
+	public void deleteEmployeById(int employeId)
+	{
+		Employe employe = employeRepository.findById(employeId).get();
+
+		//Desaffecter l'employe de tous les departements
+		//c'est le bout master qui permet de mettre a jour
+		//la table d'association
+		for(Departement dep : employe.getDepartements()){
+			dep.getEmployes().remove(employe);
+		}
+
+		employeRepository.delete(employe);
 	}
 
 
-	public void deleteContratById(int contratId) {
-		   logger.info("debut suppression contrat");
+	public int getNombreEmployeJPQL() {
+		return employeRepository.countemp();
+	}
+	
+	public List<String> getAllEmployeNamesJPQL() {
+		return employeRepository.employeNames();
 
-		Contrat contratManagedEntity=new Contrat();
-		  try{	contratManagedEntity = contratRepoistory.findById(contratId).orElseThrow(()-> new ContratNotFoundException("contrat inexistable"));
-				 logger.trace("reference contrat "+contratManagedEntity.getReference());
-			  }
-		  catch(Exception e){
-					logger.error("contrat invalide");
-			  }
-		  try{	
-			  contratRepoistory.delete(contratManagedEntity);
-			  logger.info("la surpression est realise avec succés");
-				}
-			catch(Exception e){			
-				logger.error("erreur lors de la suppression");
-			   }
+	}
+	
+	
+	public void mettreAjourEmailByEmployeIdJPQL(String email, int employeId) {
+		employeRepository.mettreAjourEmailByEmployeIdJPQL(email, employeId);
+
+	}
+	
+	public float getSalaireByEmployeIdJPQL(int employeId) {
+		return employeRepository.getSalaireByEmployeIdJPQL(employeId);
 	}
 
+	public List<Employe> getAllEmployes() {
+				return (List<Employe>) employeRepository.findAll();
+	}
+
+	
+	
+	
+	
+	//JIHEN 
+		public void deleteAllContratJPQL() {
+	         employeRepository.deleteAllContratJPQL();
+		}
+		public void deleteContratById(int contratId) {
+			Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
+			contratRepoistory.delete(contratManagedEntity);
+
+		}
+		public void affecterContratAEmploye(int contratId, int employeId) {
+			Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
+			Employe employeManagedEntity = employeRepository.findById(employeId).get();
+
+			contratManagedEntity.setEmploye(employeManagedEntity);
+			contratRepoistory.save(contratManagedEntity);
+			
+		}
+
+
+		public int ajouterContrat(Contrat contrat) {
+			contratRepoistory.save(contrat);
+			return contrat.getReference();
+		}
 
 }
