@@ -41,6 +41,12 @@ public class Contrat implements Serializable {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Contrat [reference=" + reference + ", dateDebut=" + dateDebut + ", typeContrat=" + typeContrat
+				+ ", salaire=" + salaire + ", employe=" + employe + "]";
+	}
+
 	public Contrat( Date dateDebut, String typeContrat, float salaire, Employe employe) {
 		super();
 		this.dateDebut = dateDebut;

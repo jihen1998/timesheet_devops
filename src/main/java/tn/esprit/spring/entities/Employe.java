@@ -140,6 +140,12 @@ public class Employe implements Serializable {
 		this.timesheets = timesheets;
 	}
 
+	@Override
+	public String toString() {
+		return "Employe [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", email=" + email + ", isActif=" + isActif
+				+ ", role=" + role + ", departements=" + departements + ", contrat=" + contrat + ", timesheets="
+				+ timesheets + "]";
+	}
 	
 	
 	

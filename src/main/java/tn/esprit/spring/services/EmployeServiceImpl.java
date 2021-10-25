@@ -239,10 +239,9 @@ public class EmployeServiceImpl implements IEmployeService {
 		}
 
 			public int ajouterContrat(Contrat contrat) {
-				   logger.trace("debut ajout");	  
-				   logger.info("debut ajout");	  
+				   logger.info("debut methode ajout");	  
 				   try{	 contratRepoistory.save(contrat);
-						 logger.info("l'ajout est realise avec succés");
+						 logger.info("l'ajout est realise avec succés, fin methode ajouterContarat");
 					   		}
 					   catch(Exception e){
 							logger.error("erreur d'ajout");}

@@ -11,16 +11,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import tn.esprit.spring.dto.ContratDTO;
 import tn.esprit.spring.entities.Contrat;
-import tn.esprit.spring.entities.ContratDTO;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.services.IEmployeService;
 
 @RestController
 public class RestControlEmploye {
-	final static Logger logger = Logger.getLogger(RestControlEmploye.class);
+	static final  Logger logger = Logger.getLogger(RestControlEmploye.class);
 	@Autowired
 	IEmployeService iemployeservice;
+
 	//SIWAR
 	
 	// http://localhost:8081/SpringMVC/servlet/ajouterEmployer
@@ -96,7 +98,6 @@ public class RestControlEmploye {
 				return iemployeservice.getAllEmployes();
 			}
 
-
 	
 	
 	
@@ -119,7 +120,7 @@ public class RestControlEmploye {
 	@PostMapping("/ajouterContrat")
 	@ResponseBody
 		public int ajouterContrat(@RequestBody ContratDTO contrat) {
-			Contrat persitentcontrat=new Contrat(contrat.getDateDebut(), contrat.getTypeContrat(), contrat.getSalaire(),contrat.getEmploye());
+			Contrat persitentcontrat=new Contrat(contrat.getDateDebutDto(), contrat.getTypeContratDto(), contrat.getSalaireDto(),contrat.getEmployeDto());
 			iemployeservice.ajouterContrat(persitentcontrat);
 			return persitentcontrat.getReference();
 	}
