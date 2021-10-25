@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import tn.esprit.spring.entities.Contrat;
+import tn.esprit.spring.entities.ContratDTO;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.services.IEmployeService;
 
@@ -13,9 +14,10 @@ public class IControllerEmployeImpl  {
 	@Autowired
 	IEmployeService iemployeservice;
 	//JIHEN
-	public int ajouterContrat(Contrat contrat) {
-		iemployeservice.ajouterContrat(contrat);
-		return contrat.getReference();
+	public int ajouterContrat(ContratDTO contrat) {
+		Contrat persitentcontrat=new Contrat(contrat.getDateDebut(), contrat.getTypeContrat(), contrat.getSalaire(),contrat.getEmploye());
+		iemployeservice.ajouterContrat(persitentcontrat);
+		return persitentcontrat.getReference();
 	}
 	
 	
