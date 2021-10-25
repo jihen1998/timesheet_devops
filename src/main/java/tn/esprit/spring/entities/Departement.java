@@ -30,8 +30,39 @@ public class Departement implements Serializable {
 	@JsonIgnore
 	@ManyToMany
 	private List<Employe> employes;
+	@ManyToOne
+	private Entreprise entreprise;
+
+
 	
-	
+	public Entreprise getEntreprise() {
+		return entreprise;
+	}
+
+
+
+	public void setEntreprise(Entreprise entreprise) {
+		this.entreprise = entreprise;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+
+
+
+
 	public Departement() {
 		super();
 	}

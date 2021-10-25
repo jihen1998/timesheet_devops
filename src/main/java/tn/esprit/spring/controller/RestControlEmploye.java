@@ -1,6 +1,7 @@
 package tn.esprit.spring.controller;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import tn.esprit.spring.services.IEmployeService;
 
 @RestController
 public class RestControlEmploye {
+	final static Logger logger = Logger.getLogger(RestControlEmploye.class);
 	@Autowired
 	IEmployeService iemployeservice;
 	//SIWAR
@@ -28,6 +30,8 @@ public class RestControlEmploye {
 		public Employe ajouterEmploye(@RequestBody Employe employe)
 		{
 			iemployeservice.ajouterEmploye(employe);
+			logger.info("Added:: " + employe);
+			logger.error("l employé ne peut pas être ajouté");
 			return employe;
 		}
 		
@@ -35,6 +39,9 @@ public class RestControlEmploye {
 		@PutMapping(value = "/modifyEmail/{id}/{newemail}") 
 		@ResponseBody
 		public void mettreAjourEmailByEmployeId(@PathVariable("newemail") String email, @PathVariable("id") int employeId) {
+			logger.info("Modified:: " + employeId +" "+ email);
+			logger.error("l email de l employé ne peut pas être modifié");
+			
 			iemployeservice.mettreAjourEmailByEmployeId(email, employeId);
 			
 		}
@@ -50,6 +57,8 @@ public class RestControlEmploye {
 		    @DeleteMapping("/deleteEmployeById/{idemp}") 
 			@ResponseBody 
 			public void deleteEmployeById(@PathVariable("idemp")int employeId) {
+		    	logger.info("Deleted:: " + employeId);
+				logger.error(" l id de l employé ne peut pas être supprimé");
 				iemployeservice.deleteEmployeById(employeId);
 				
 			}

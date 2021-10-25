@@ -3,6 +3,7 @@ package tn.esprit.spring.services;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,17 @@ import tn.esprit.spring.repository.EmployeRepository;
 
 @Service
 public class EmployeServiceImpl implements IEmployeService {
+	
+	
 
 	@Autowired
 	EmployeRepository employeRepository;
 	
 	@Autowired
 	ContratRepository contratRepoistory;
+	
+	
+	
 	//SIWAR
 	public int ajouterEmploye(Employe employe) {
 		employeRepository.save(employe);
@@ -77,6 +83,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	public List<Employe> getAllEmployes() {
 				return (List<Employe>) employeRepository.findAll();
 	}
+	
 
 	
 	
