@@ -19,7 +19,7 @@ public interface IEmployeService {
 	public float getSalaireByEmployeIdJPQL(int employeId);
 	public void mettreAjourEmailByEmployeIdJPQL(String email, int employeId);
 	public List<Employe> getAllEmployes();
-	
+	public Integer addOrUpdateEmploye(Employe employe);
 	
 	
 

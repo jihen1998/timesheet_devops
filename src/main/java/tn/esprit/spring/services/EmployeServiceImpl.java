@@ -8,7 +8,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
@@ -35,24 +35,65 @@ public class EmployeServiceImpl implements IEmployeService {
 	//SIWAR
 	
 	public int ajouterEmploye(Employe employe) {
-		employeRepository.save(employe);
+		logger.info("Lancement de l'ajout de l'employé à la base de données");
+		try { employeRepository.save(employe);
+		     logger.info("Succés de l'ajout de l'employé");
+		}
+		catch (Exception e){
+			logger.error("Un erreur a apparait lors de l'ajout de l'employé");
+			}
 		return employe.getId();
 	}
-
+	public Integer addOrUpdateEmploye(Employe employe) {
+		logger.debug("Methode ajouterEmployee");
+		try {
+			employeRepository.save(employe);
+			logger.info("Employe ajoutée avec id = "+employe.getId());
+		return employe.getId();
+		}
+		catch (Exception e) {
+			logger.error("erreur methode ajouterEntreprise :" +e);	
+		       return null;       
+				}		
+	}
 	
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
+		logger.debug("Methode mettre à jour l'email de l'employee");
+		try {
 		Employe employe = employeRepository.findById(employeId).get();
+		if(employe!=null){
 		employe.setEmail(email);
 		employeRepository.save(employe);
+		logger.debug("mettreAjourEmailByEmployeId est finie avec succes ");
+		
+		}
+	}
+		catch (Exception e) {
+			logger.error("erreur au niveau de la méthode  mettreAjourEmailByEmployeId : " +e);
+		}
+		
+	}
+	
+	
+		
 
+	
+	public String getEmployePrenomById(int employeId) {
+		logger.debug("lancement de la methode getEmplpyeById ");
+		try {
+		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
+		logger.debug("la méthode getEmployeById est finie avec succés ");
+		
+		return employeManagedEntity!=null ?employeManagedEntity.getPrenom():null;}
+		catch (Exception e) {
+			logger.error("erreur methode getEmployeeById : " +e);
+			return null;
+		}	
+		
 	}
-    public String getEmployePrenomById(int employeId) {
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
-		return employeManagedEntity.getPrenom();
-	}
+
 	public void deleteEmployeById(int employeId)
 	{
-		 logger.info("lancement de la suppression de l'id de l'employé de la base de données ");
 		Employe employe = employeRepository.findById(employeId).get();
 
 		//Desaffecter l'employe de tous les departements
@@ -64,6 +105,27 @@ public class EmployeServiceImpl implements IEmployeService {
 
 		employeRepository.delete(employe);
 	}
+    
+    
+    /**	@Transactional
+	public int deleteEmployeById(int employeId)
+	{
+		 logger.info("lancement de la méthode de la suppression de l'id de l'employé de la base de données ");
+		 try {
+			 if (employeRepository.findById(employeId).orElse(null)!=null){
+				 employeRepository.delete(employeRepository).findById(employeId).orElse(null));
+				 logger.debug("deleteEntrepriseById fini avec succes ");
+				 
+				 return 0;}else {
+					 logger.error("erreur methode deleteEntrepriseById : " );
+						return -1;
+					}
+				} catch (Exception e) {
+					logger.error("erreur methode deleteEntrepriseById : " +e);
+					return -1;
+					}
+				}		
+	*/
 
 
 	public int getNombreEmployeJPQL() {
@@ -86,8 +148,28 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 
 	public List<Employe> getAllEmployes() {
-				return (List<Employe>) employeRepository.findAll();
-	}
+		
+		List<Employe> employes = null; 
+		try {
+	
+			
+			logger.info("In Method getAllEmployes");
+			employes = (List<Employe>) employeRepository.findAll();
+				 logger.info("Employes");
+					logger.debug("Connexion Bd");
+					
+					for (Employe employe : employes) {
+						logger.info("Employe"+employe.getNom());
+					} 
+					logger.info("out with succes");
+
+				}catch (Exception e) {
+					logger.error("out of method with error"+e);		}
+
+				return employes;
+			}
+
+	
 	
 
 	
