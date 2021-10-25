@@ -31,8 +31,7 @@ public class RestControlEmploye {
 		public Employe ajouterEmploye(@RequestBody Employe employe)
 		{
 			iemployeservice.ajouterEmploye(employe);
-			logger.info("Added:: " + employe);
-			logger.error("l employé ne peut pas être ajouté");
+			
 			return employe;
 		}
 		
@@ -40,9 +39,6 @@ public class RestControlEmploye {
 		@PutMapping(value = "/modifyEmail/{id}/{newemail}") 
 		@ResponseBody
 		public void mettreAjourEmailByEmployeId(@PathVariable("newemail") String email, @PathVariable("id") int employeId) {
-			logger.info("Modified:: " + employeId +" "+ email);
-			logger.error("l email de l employé ne peut pas être modifié");
-			
 			iemployeservice.mettreAjourEmailByEmployeId(email, employeId);
 			
 		}
@@ -58,8 +54,7 @@ public class RestControlEmploye {
 		    @DeleteMapping("/deleteEmployeById/{idemp}") 
 			@ResponseBody 
 			public void deleteEmployeById(@PathVariable("idemp")int employeId) {
-		    	logger.info("Deleted:: " + employeId);
-				logger.error(" l id de l employé ne peut pas être supprimé");
+		    	
 				iemployeservice.deleteEmployeById(employeId);
 				
 			}

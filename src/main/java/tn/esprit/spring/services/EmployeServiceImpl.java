@@ -22,7 +22,7 @@ import tn.esprit.spring.repository.EmployeRepository;
 @Service
 public class EmployeServiceImpl implements IEmployeService {
 	
-	
+	 private static final Logger logger = LogManager.getLogger(EmployeServiceImpl.class);
 
 	@Autowired
 	EmployeRepository employeRepository;
@@ -33,11 +33,13 @@ public class EmployeServiceImpl implements IEmployeService {
 	
 	
 	//SIWAR
+	
 	public int ajouterEmploye(Employe employe) {
 		employeRepository.save(employe);
 		return employe.getId();
 	}
 
+	
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		Employe employe = employeRepository.findById(employeId).get();
 		employe.setEmail(email);
@@ -50,6 +52,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 	public void deleteEmployeById(int employeId)
 	{
+		 logger.info("lancement de la suppression de l'id de l'employé de la base de données ");
 		Employe employe = employeRepository.findById(employeId).get();
 
 		//Desaffecter l'employe de tous les departements
@@ -89,7 +92,7 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	
 	
-    private static final Logger logger = LogManager.getLogger(EmployeServiceImpl.class);
+   
 
 	
 	//JIHEN 
@@ -163,4 +166,6 @@ public class EmployeServiceImpl implements IEmployeService {
 							logger.error("erreur d'ajout");}
 				return contrat.getReference();
 			}
+			
+			
 }
