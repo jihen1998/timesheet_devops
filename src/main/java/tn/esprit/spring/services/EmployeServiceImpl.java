@@ -2,14 +2,13 @@ package tn.esprit.spring.services;
 
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.apache.log4j.LogManager;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
@@ -44,6 +43,7 @@ public class EmployeServiceImpl implements IEmployeService {
 			}
 		return employe.getId();
 	}
+	
 	public Integer addOrUpdateEmploye(Employe employe) {
 		logger.debug("Methode ajouterEmployee");
 		try {
@@ -60,7 +60,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		logger.debug("Methode mettre à jour l'email de l'employee");
 		try {
-		Employe employe = employeRepository.findById(employeId).get();
+		Employe employe = employeRepository.findById(employeId).orElse(null);
 		if(employe!=null){
 		employe.setEmail(email);
 		employeRepository.save(employe);
@@ -92,10 +92,11 @@ public class EmployeServiceImpl implements IEmployeService {
 		
 	}
 
-	public void deleteEmployeById(int employeId)
+	public void deleteEmployeById(int employeId)throws NoSuchElementException
 	{
+		
 		Employe employe = employeRepository.findById(employeId).get();
-
+		
 		//Desaffecter l'employe de tous les departements
 		//c'est le bout master qui permet de mettre a jour
 		//la table d'association
@@ -174,7 +175,6 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	
 	
-   
 
 	
 	//JIHEN 

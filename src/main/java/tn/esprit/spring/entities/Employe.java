@@ -54,11 +54,16 @@ public class Employe implements Serializable {
 	private List<Timesheet> timesheets;
 	
 	
-	public Employe() {
-		super();
-	}
 	
-	public Employe(String nom, String prenom, String email, boolean isActif, Role role) {
+	
+	public Employe() {
+		super();}
+	
+
+
+
+	public Employe(int id, String nom, String prenom, String email, boolean isActif, Role role) {
+		this.id= id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;

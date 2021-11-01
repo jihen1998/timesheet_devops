@@ -38,6 +38,8 @@ public interface EmployeRepository extends CrudRepository<Employe, Integer>  {
     @Transactional
     @Query("DELETE from Contrat")
     public void deleteAllContratJPQL();
+
+	public void deleteEmployeById(int i);
     		
    
 
