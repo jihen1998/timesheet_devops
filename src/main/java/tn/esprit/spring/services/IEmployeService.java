@@ -20,7 +20,8 @@ public interface IEmployeService {
 	public void mettreAjourEmailByEmployeIdJPQL(String email, int employeId);
 	public List<Employe> getAllEmployes();
 	public Integer addOrUpdateEmploye(Employe employe);
-	
+	public Employe getEmployeById(int id);
+	public void deleteEmploye(int id);
 	
 
 	

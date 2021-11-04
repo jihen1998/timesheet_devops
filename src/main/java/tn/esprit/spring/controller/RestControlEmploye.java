@@ -51,13 +51,23 @@ public class RestControlEmploye {
 		   public String getEmployePrenomById(@PathVariable("idemp")int employeId) {
 				return iemployeservice.getEmployePrenomById(employeId);
 			}
-
-		    // URL : http://localhost:8081/SpringMVC/servlet/deleteEmployeById/1
+		   
+		   
+		   /**
+		   // URL : http://localhost:8081/SpringMVC/servlet/deleteEmployeById/1
 		    @DeleteMapping("/deleteEmployeById/{idemp}") 
 			@ResponseBody 
 			public void deleteEmployeById(@PathVariable("idemp")int employeId) {
 		    	
 				iemployeservice.deleteEmployeById(employeId);
+				
+			}
+		 */
+		    @DeleteMapping("/deleteEmployeById1/{idemp}") 
+			@ResponseBody 
+			public void deleteEmployeById1(@PathVariable("idemp")int employeId) {
+		    	
+				iemployeservice.deleteEmploye(employeId);
 				
 			}
 		

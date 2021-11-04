@@ -132,7 +132,7 @@ public class EmployeTest {
 	public void getEmployePrenomByIdTest() {
 		String prenom = employeService.getEmployePrenomById(employe1.getId());
 	
-		assertThat(prenom).isEqualTo(null);
+		assertThat(prenom).isNull();
 	}
  	@Test
 	public void mettreAjourEmailByEmployeIdJPQLTest() {

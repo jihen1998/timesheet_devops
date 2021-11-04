@@ -40,6 +40,9 @@ public interface EmployeRepository extends CrudRepository<Employe, Integer>  {
     public void deleteAllContratJPQL();
 
 	public void deleteEmployeById(int i);
+
+	public Employe getEmployeById(int employeId);
+
     		
    
 

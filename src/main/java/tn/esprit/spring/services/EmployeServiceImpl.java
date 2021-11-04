@@ -3,6 +3,7 @@ package tn.esprit.spring.services;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.apache.log4j.LogManager;
 
@@ -28,6 +29,8 @@ public class EmployeServiceImpl implements IEmployeService {
 	
 	@Autowired
 	ContratRepository contratRepoistory;
+	
+	
 	
 	
 	
@@ -57,28 +60,37 @@ public class EmployeServiceImpl implements IEmployeService {
 				}		
 	}
 	
+	
+	
+	
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
-		logger.debug("Methode mettre à jour l'email de l'employee");
+		Employe x = new Employe ();
 		try {
-		Employe employe = employeRepository.findById(employeId).orElse(null);
-		if(employe!=null){
-		employe.setEmail(email);
-		employeRepository.save(employe);
-		logger.debug("mettreAjourEmailByEmployeId est finie avec succes ");
-		
-		}
-	}
-		catch (Exception e) {
-			logger.error("erreur au niveau de la méthode  mettreAjourEmailByEmployeId : " +e);
+		logger.info("employe existe");	
+		logger.debug("mis a jour mail");
+		Optional<Employe> y = employeRepository.findById(employeId) ;
+		if (y.isPresent())
+		{
+			x = y.get();
 		}
 		
+	    
+		x.setEmail(email);
+		logger.info("mis a jour mail avec Succès");
+	
+		employeRepository.save(x);
+		logger.info("mis a jour sans erreur");
+		}catch (Exception e) {
+			logger.error("Erreur avec la  mis a jour   email " +e);
+		}
 	}
+
 	
 	
 		
 
 	
-	public String getEmployePrenomById(int employeId) {
+	public String getEmployePrenomById1(int employeId) {
 		logger.debug("lancement de la methode getEmplpyeById ");
 		try {
 		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
@@ -91,22 +103,141 @@ public class EmployeServiceImpl implements IEmployeService {
 		}	
 		
 	}
+//test 
+	public String getEmployePrenomById(int employeId) {
+		
+		Employe x = new Employe();
+		try{
+			logger.info("affichage d'une employe par id : "+employeId);
+			logger.debug("entrain d'afficher employe ... ");
+			
+			
+			Optional<Employe> y = employeRepository.findById(employeId) ;
+			if (y.isPresent())
+			{
+				x = y.get();
+			}
+								
+			logger.debug("je viens d'afficher employe: ");
+			logger.info("affichage sans erreurs " );
+		}
+		catch(Exception e){
+			logger.error("Erreur dans l'affichage de employe: "+e);
+		}finally{
+			logger.info("Methode affichage");
+	
+	
+	
+		}
+	return x.getPrenom();
+}
 
-	public void deleteEmployeById(int employeId)throws NoSuchElementException
-	{
+	
+	@Override
+	public void deleteEmploye(int id) {
+		try{
+			logger.info("Finding Employe with id = %d"+id);
+			employeRepository.deleteById(id);
+			logger.info("Employe Deleted Successfuly ");
+		}catch (Exception e) {
+
+			logger.error("The emp with id = %d does not Exist"+id);
+		}
+
+	}
+	
+	
+	// à retester
+	
+    public void deleteEmployeById(int employeId)
+	
+	 { 
+		Employe employe = new Employe ();
+		try {
+		logger.info("suppression d'un employe ");
+		logger.debug("selection du emoloye a supprimé");
 		
-		Employe employe = employeRepository.findById(employeId).get();
+		Optional<Employe> y = employeRepository.findById(employeId) ;
+		if (y.isPresent())
+		{
 		
+			
+			for(Departement dep : employe.getDepartements()){
+				dep.getEmployes().remove(employe);
+			}
+		}
+		
+		
+
 		//Desaffecter l'employe de tous les departements
 		//c'est le bout master qui permet de mettre a jour
 		//la table d'association
-		for(Departement dep : employe.getDepartements()){
-			dep.getEmployes().remove(employe);
-		}
-
+		
+		logger.debug("suppression de employe ");
 		employeRepository.delete(employe);
+		logger.debug("je viens de supprimer un employe");
+		logger.info("suppression without errors");
 	}
-    
+		
+	catch(Exception e){
+		logger.error("Erreur dans l'affectation du employe : "+e);
+	}
+	}
+
+	
+	
+	
+	
+	@Override
+	public Employe getEmployeById(int id) {
+		Optional<Employe> employe = employeRepository.findById(id);
+        if (employe.isPresent()) {
+        	if(logger.isDebugEnabled())
+        	{
+        		logger.debug(String.format("Entreprise exitse: %d", employe.get().getId()));        		
+        	}
+            return employe.get();
+        }
+        return null;
+	}
+	
+public List<Employe> getAllEmployes() {
+		
+		List<Employe> employes = null; 
+		try {
+	
+			
+			logger.info("In Method getAllEmployes");
+			employes = (List<Employe>) employeRepository.findAll();
+				 logger.info("Employes");
+					logger.debug("Connexion Bd");
+					
+					for (Employe employe : employes) {
+						logger.info("Employe"+employe.getNom());
+					} 
+					logger.info("out with succes");
+
+				}catch (Exception e) {
+					logger.error("out of method with error"+e);		}
+
+				return employes;
+			}
+
+
+	   /**
+		public void deleteEmployeById(int employeId)throws NoSuchElementException
+		{
+			Employe employe = employeRepository.findById(employeId).get();
+
+			//Desaffecter l'employe de tous les departements
+			//c'est le bout master qui permet de mettre a jour
+			//la table d'association
+			for(Departement dep : employe.getDepartements()){
+				dep.getEmployes().remove(employe);
+			}
+
+			employeRepository.delete(employe);
+		}
     
     /**	@Transactional
 	public int deleteEmployeById(int employeId)
@@ -148,32 +279,6 @@ public class EmployeServiceImpl implements IEmployeService {
 		return employeRepository.getSalaireByEmployeIdJPQL(employeId);
 	}
 
-	public List<Employe> getAllEmployes() {
-		
-		List<Employe> employes = null; 
-		try {
-	
-			
-			logger.info("In Method getAllEmployes");
-			employes = (List<Employe>) employeRepository.findAll();
-				 logger.info("Employes");
-					logger.debug("Connexion Bd");
-					
-					for (Employe employe : employes) {
-						logger.info("Employe"+employe.getNom());
-					} 
-					logger.info("out with succes");
-
-				}catch (Exception e) {
-					logger.error("out of method with error"+e);		}
-
-				return employes;
-			}
-
-	
-	
-
-	
 	
 
 	
