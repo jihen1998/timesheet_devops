@@ -281,77 +281,84 @@ public List<Employe> getAllEmployes() {
 
 	
 
-	
 	//JIHEN 
-		public void deleteAllContratJPQL() {
-			 logger.info("debut suppression de tous les contrat");
-			 try{ 
-				 employeRepository.deleteAllContratJPQL();
-				 logger.info("fin ppression de tous les contrat avec succées");
-				 }
-			 catch(Exception e){
-				 logger.error("error lors de la suppression de tous les contrats");
-			 	}
-		}
-
-		public void deleteContratById(int contratId) {
-			   logger.info("debut suppression contrat");
-			Contrat contratManagedEntity=new Contrat();
-			  try{	contratManagedEntity = contratRepoistory.findById(contratId).orElseThrow(()-> new ContratNotFoundException("contrat inexistable"));
-					 logger.trace("reference contrat "+contratManagedEntity.getReference());
-				  }
-			  catch(Exception e){
-						logger.error("contrat invalide");
-				  }
-			  try{	
-				  contratRepoistory.delete(contratManagedEntity);
-				  logger.info("la surpression est realise avec succés");
-					}
-				catch(Exception e){			
-					logger.error("erreur lors de la suppression");
-				   }
-		}
-		public void affecterContratAEmploye(int contratId, int employeId) {
-			  	logger.info("debut affectation contrat a employe");   
-			  	Contrat contratManagedEntity=new Contrat();	
-			  	Employe employeManagedEntity=new Employe(); 
-			   try{
-				 contratManagedEntity =contratRepoistory.findById(contratId).orElseThrow(()->new ContratNotFoundException("Contrat inexistable"));
-				 logger.trace("reference contrat"+contratManagedEntity.getReference());
-			   		}
-			   
-			   catch(Exception e){
-					logger.error("contrat invalide");
-			   		}
-			   
-			   try{		
-				   employeManagedEntity = employeRepository.findById(employeId).orElseThrow(()->new EmployeNotFoundException("Employe inexistable"));
-				   logger.trace("nom de l employe a affecter"+employeManagedEntity.getNom());	
-			   		}
-			   
-			   catch(Exception e){			
-				   logger.error("employe invalide");
-				   }
-			   
-				try{		
-					contratManagedEntity.setEmploye(employeManagedEntity);
-					contratRepoistory.save(contratManagedEntity);
-				  	logger.info("l'affectation est realise avec succés");
-					}
-				catch(Exception e){			
-					logger.error("erreur lors de l affectation");
-				   }
-		}
-
-			public int ajouterContrat(Contrat contrat) {
-				   logger.info("debut methode ajout");	  
-				   try{	 contratRepoistory.save(contrat);
-						 logger.info("l'ajout est realise avec succés, fin methode ajouterContarat");
-					   		}
-					   catch(Exception e){
-							logger.error("erreur d'ajout");}
-				return contrat.getReference();
+			public List<Contrat> deleteAllContratJPQL() {
+				 logger.info("debut suppression de tous les contrat");
+				 try{ 
+					 employeRepository.deleteAllContratJPQL();
+					 logger.info("fin ppression de tous les contrat avec succées");
+					 }
+				 catch(Exception e){
+					 logger.error("error lors de la suppression de tous les contrats");
+				 	}
+				 return (List<Contrat>) contratRepoistory.findAll();
 			}
-			
-			
-}
+
+			public String deleteContratById(int contratId) {
+				String c="";
+				   logger.info("debut suppression contrat");
+				Contrat contratManagedEntity=new Contrat();
+				  try{	contratManagedEntity = contratRepoistory.findById(contratId).orElseThrow(()-> new ContratNotFoundException("contrat inexistable"));
+						 logger.trace("reference contrat "+contratManagedEntity.getReference());
+					  }
+				  catch(Exception e){
+							logger.error("contrat invalide");
+					  }
+				  try{	
+					  contratRepoistory.delete(contratManagedEntity);
+					  c="success";
+					  logger.info("la surpression est realise avec succés");
+						}
+					catch(Exception e){			
+						logger.error("erreur lors de la suppression");
+						c="error";
+					   }
+				  return c;
+			}
+			public Contrat affecterContratAEmploye(int contratId, int employeId) {
+					Contrat c=new Contrat();
+				  	logger.info("debut affectation contrat a employe");   
+				  	Contrat contratManagedEntity=new Contrat();	
+				  	Employe employeManagedEntity=new Employe(); 
+				   try{
+					 contratManagedEntity =contratRepoistory.findById(contratId).orElseThrow(()->new ContratNotFoundException("Contrat inexistable"));
+					 logger.trace("reference contrat"+contratManagedEntity.getReference());
+				   		}
+				   
+				   catch(Exception e){
+						logger.error("contrat invalide");
+				   		}
+				   
+				   try{		
+					   employeManagedEntity = employeRepository.findById(employeId).orElseThrow(()->new EmployeNotFoundException("Employe inexistable"));
+					   logger.trace("nom de l employe a affecter"+employeManagedEntity.getNom());	
+				   		}
+				   
+				   catch(Exception e){			
+					   logger.error("employe invalide");
+					   }
+				   
+					try{		
+						contratManagedEntity.setEmploye(employeManagedEntity);
+						
+						c=contratRepoistory.save(contratManagedEntity);
+					  	logger.info("l'affectation est realise avec succés");
+						}
+					catch(Exception e){			
+						logger.error("erreur lors de l affectation");
+					   }
+				  	return c;
+			}
+
+				public int ajouterContrat(Contrat contrat) {
+					   logger.info("debut methode ajout");	  
+					   try{	 contratRepoistory.save(contrat);
+							 logger.info("l'ajout est realise avec succés, fin methode ajouterContarat");
+						   		}
+						   catch(Exception e){
+								logger.error("erreur d'ajout");}
+					return contrat.getReference();
+				}
+				
+				
+	}

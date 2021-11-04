@@ -28,8 +28,9 @@ public interface IEmployeService {
 
 	
 	//Jihen
-	public void deleteContratById(int contratId);
+	public String deleteContratById(int contratId);
 	public int ajouterContrat(Contrat contrat);
-	public void deleteAllContratJPQL();
-	public void affecterContratAEmploye(int contratId, int employeId);
+	public List<Contrat> deleteAllContratJPQL();
+	public Contrat affecterContratAEmploye(int contratId, int employeId);
+	
 }
