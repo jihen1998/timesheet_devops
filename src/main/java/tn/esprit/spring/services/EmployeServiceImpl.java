@@ -63,7 +63,8 @@ public class EmployeServiceImpl implements IEmployeService {
 	
 	
 	
-	public void mettreAjourEmailByEmployeId(String email, int employeId) {
+	public String mettreAjourEmailByEmployeId(String email, int employeId) {
+		String msg="";
 		Employe x = new Employe ();
 		try {
 		logger.info("employe existe");	
@@ -77,12 +78,15 @@ public class EmployeServiceImpl implements IEmployeService {
 	    
 		x.setEmail(email);
 		logger.info("mis a jour mail avec Succès");
+		msg="success";
 	
 		employeRepository.save(x);
 		logger.info("mis a jour sans erreur");
 		}catch (Exception e) {
 			logger.error("Erreur avec la  mis a jour   email " +e);
+			msg="error";
 		}
+		return msg;
 	}
 
 	
@@ -134,16 +138,19 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	
 	@Override
-	public void deleteEmploye(int id) {
+	public String deleteEmploye(int id) {
+		String msg="";
 		try{
 			logger.info("Finding Employe with id = %d"+id);
 			employeRepository.deleteById(id);
 			logger.info("Employe Deleted Successfuly ");
+			msg="Delete Done";
 		}catch (Exception e) {
 
 			logger.error("The emp with id = %d does not Exist"+id);
+			msg="error";
 		}
-
+   return msg;
 	}
 	
 	
@@ -270,8 +277,10 @@ public List<Employe> getAllEmployes() {
 	}
 	
 	
-	public void mettreAjourEmailByEmployeIdJPQL(String email, int employeId) {
+	public String mettreAjourEmailByEmployeIdJPQL(String email, int employeId) {
+		String msg="&&";
 		employeRepository.mettreAjourEmailByEmployeIdJPQL(email, employeId);
+		return msg;
 
 	}
 	

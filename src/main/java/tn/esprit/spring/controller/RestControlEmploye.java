@@ -63,9 +63,9 @@ public class RestControlEmploye {
 				
 			}
 		 */
-		    @DeleteMapping("/deleteEmployeById1/{idemp}") 
+		    @DeleteMapping("/deleteEmployeById/{idemp}") 
 			@ResponseBody 
-			public void deleteEmployeById1(@PathVariable("idemp")int employeId) {
+			public void deleteEmployeById(@PathVariable("idemp")int employeId) {
 		    	
 				iemployeservice.deleteEmploye(employeId);
 				

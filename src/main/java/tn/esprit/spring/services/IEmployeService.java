@@ -11,17 +11,17 @@ import tn.esprit.spring.entities.Employe;
 public interface IEmployeService {
     //SIWAR
 	public int ajouterEmploye(Employe employe);
-	public void mettreAjourEmailByEmployeId(String email, int employeId);
+	public String mettreAjourEmailByEmployeId(String email, int employeId);
 	public String getEmployePrenomById(int employeId);
 	public void deleteEmployeById(int employeId);
 	public int getNombreEmployeJPQL();
 	public List<String> getAllEmployeNamesJPQL();
 	public float getSalaireByEmployeIdJPQL(int employeId);
-	public void mettreAjourEmailByEmployeIdJPQL(String email, int employeId);
+	public String mettreAjourEmailByEmployeIdJPQL(String email, int employeId);
 	public List<Employe> getAllEmployes();
 	public Integer addOrUpdateEmploye(Employe employe);
 	public Employe getEmployeById(int id);
-	public void deleteEmploye(int id);
+	public String deleteEmploye(int id);
 	
 
 	
