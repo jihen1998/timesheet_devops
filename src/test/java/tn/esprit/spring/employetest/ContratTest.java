@@ -44,7 +44,7 @@ public class ContratTest {
 			   contrat.setTypeContrat("CDD"); 
 			   Optional<Contrat> optionalEntityType = Optional.of(contrat);
 		    when(contratRepository.findById(1)).thenReturn(optionalEntityType);
-		   assertEquals("success Add Contrat",iemployeService.deleteContratById(contrat.getReference()));
+		   assertEquals("success Delete Contrat",iemployeService.deleteContratById(contrat.getReference()));
 	}
 	@Test
 	public void testDeleteAllContratJPQL() {

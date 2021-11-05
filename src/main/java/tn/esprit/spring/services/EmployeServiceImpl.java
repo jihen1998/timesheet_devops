@@ -314,12 +314,12 @@ public List<Employe> getAllEmployes() {
 					  }
 				  try{	
 					  contratRepoistory.delete(contratManagedEntity);
-					  c="success Add Contrat";
+					  c="success Delete Contrat";
 					  logger.info("la surpression est realise avec succés");
 						}
 					catch(Exception e){			
 						logger.error("erreur lors de la suppression");
-						c="error Add contrat";
+						c="error Delete contrat";
 					   }
 				  return c;
 			}
