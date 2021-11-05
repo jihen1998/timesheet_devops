@@ -72,7 +72,7 @@ public class EmployeTest {
 		}
    
      @Test
- 	public void ajouterEmployeTest() {
+ 	public void TestajouterEmploye() {
 		   Employe e = new Employe();
 		   e.setActif(true);
 		   e.setEmail("swayer@gmail.com");
@@ -86,7 +86,7 @@ public class EmployeTest {
 
  
  	 @Test
-     public void getAllEmployes() {
+     public void TestgetAllEmployes() {
          assertTrue(employeService.getAllEmployes().isEmpty());
      }
 
@@ -94,34 +94,34 @@ public class EmployeTest {
  	
  	
  	@Test
-	public void testDeleteEmploye() {
+	public void TestDeleteEmploye() {
 		Employe emp = new Employe();
 		assertNotNull(emp);
 		employeRepo.deleteEmployeById(16);
 				
 	}
  	@Test
-    public void getSalaireByEmployeIdJPQL() {
+    public void TestgetSalaireByEmployeIdJPQL() {
         int employeId = 2;
         double salaire = employeService.getSalaireByEmployeIdJPQL(employeId);
         assertFalse(employeRepo.findById(employeId).isPresent() &&
         		employeRepo.findById(employeId).get().getContrat().getSalaire() == salaire);
     }
  	@Test
-    public void getAllEmployeNamesJPQLTest() {
+    public void TestgetAllEmployeNamesJPQL() {
         List<String> list = employeService.getAllEmployeNamesJPQL();
         List<String> list1 = employeService.getAllEmployes().stream().map(Employe::getNom).collect(Collectors.toList());
         assertEquals(list, list1);
     }
  	 @Test
-     public void getNombreEmployeJPQL() {
+     public void TestgetNombreEmployeJPQL() {
          List<Employe> employeList = employeService.getAllEmployes();
          int nb = employeService.getNombreEmployeJPQL();
          assertEquals(employeList.size(), nb);
      }
  	 
  	@Test
-	public void mettreAjourEmailByEmployeIdTest() {
+	public void TestmettreAjourEmailByEmployeId() {
 		employeService.mettreAjourEmailByEmployeId(mail, employe1.getId());
 		Optional<Employe> e = employeRepo.findById(employe1.getId());
 		if (e.isPresent()) {
@@ -129,13 +129,13 @@ public class EmployeTest {
 		}
 	}
  	@Test
-	public void getEmployePrenomByIdTest() {
+	public void TestgetEmployePrenomById() {
 		String prenom = employeService.getEmployePrenomById(employe1.getId());
 	
 		assertThat(prenom).isNull();
 	}
  	@Test
-	public void mettreAjourEmailByEmployeIdJPQLTest() {
+	public void TestmettreAjourEmailByEmployeIdJPQL() {
 		employeService.mettreAjourEmailByEmployeIdJPQL("siwar.awadhi1@esprit.tn", employe1.getId());
 		Optional<Employe> e = employeRepo.findById(employe1.getId());
 		if (e.isPresent()) {
