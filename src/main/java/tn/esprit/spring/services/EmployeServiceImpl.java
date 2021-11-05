@@ -2,7 +2,6 @@ package tn.esprit.spring.services;
 
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.apache.log4j.LogManager;
@@ -315,12 +314,12 @@ public List<Employe> getAllEmployes() {
 					  }
 				  try{	
 					  contratRepoistory.delete(contratManagedEntity);
-					  c="success";
+					  c="success Add Contrat";
 					  logger.info("la surpression est realise avec succés");
 						}
 					catch(Exception e){			
 						logger.error("erreur lors de la suppression");
-						c="error";
+						c="error Add contrat";
 					   }
 				  return c;
 			}
