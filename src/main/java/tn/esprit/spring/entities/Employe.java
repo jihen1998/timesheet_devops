@@ -10,16 +10,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import tn.esprit.spring.dto.EmployeDTO;
 
 
 @Entity
@@ -81,6 +77,24 @@ public class Employe implements Serializable {
 	public Employe() {
 		
 	}
+
+
+
+	
+
+
+
+	public Employe(String nom2, String prenom2, Role role2) {
+		
+	}
+
+
+
+	public Employe(String emailDTO, String nomDTO, String prenomDTO, Contrat contratDTO) {
+		
+	}
+
+
 
 
 

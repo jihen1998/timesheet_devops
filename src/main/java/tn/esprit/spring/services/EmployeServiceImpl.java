@@ -3,15 +3,10 @@ package tn.esprit.spring.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.apache.log4j.LogManager;
-
 import org.apache.log4j.Logger;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import tn.esprit.spring.dto.EmployeDTO;
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
@@ -31,8 +26,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	
 	@Autowired
 	ContratRepository contratRepoistory;
-	  @Autowired
-	    private ModelMapper modelMapper;
+	
 	
 	
 	

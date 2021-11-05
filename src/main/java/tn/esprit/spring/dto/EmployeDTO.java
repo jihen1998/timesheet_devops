@@ -1,7 +1,6 @@
 package tn.esprit.spring.dto;
 
 
-
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
@@ -14,6 +13,15 @@ public class EmployeDTO  {
 	
 	private int iDDto;
 	private String prenomDTO; 
+	private String nomDTO;
+	public String getNomDTO() {
+		return nomDTO;
+	}
+
+	public void setNomDTO(String nomDTO) {
+		this.nomDTO = nomDTO;
+	}
+
 	private String emailDTO;
 	private boolean isActifDTO;
 	@Enumerated(EnumType.STRING)
