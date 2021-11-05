@@ -2,7 +2,6 @@ package tn.esprit.spring.services;
 
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.apache.log4j.LogManager;
@@ -84,7 +83,7 @@ public class EmployeServiceImpl implements IEmployeService {
 		logger.info("mis a jour sans erreur");
 		}catch (Exception e) {
 			logger.error("Erreur avec la  mis a jour   email " +e);
-			msg="error";
+			msg="c est un erreur";
 		}
 		return msg;
 	}
