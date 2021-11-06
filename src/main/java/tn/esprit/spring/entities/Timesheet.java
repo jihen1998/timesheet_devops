@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -14,15 +11,48 @@ import javax.persistence.ManyToOne;
 public class Timesheet implements Serializable{
 
 	private static final long serialVersionUID = 3876346912862238239L;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+
+	@EmbeddedId
+	private TimesheetPK timesheetPK;
+	
+	//idMission est a la fois primary key et foreign key
+	@ManyToOne
+    @JoinColumn(name = "idMission", referencedColumnName = "id", insertable=false, updatable=false)
+	private Mission mission;
+	
+	//idEmploye est a la fois primary key et foreign key
 	
 	@ManyToOne
     @JoinColumn(name = "idEmploye", referencedColumnName = "id", insertable=false, updatable=false)
 	private Employe employe;
 	
 	
+	private boolean isValide;
+	
+
+	public boolean isValide() {
+		return isValide;
+	}
+
+	public void setValide(boolean isValide) {
+		this.isValide = isValide;
+	}
+
+	public TimesheetPK getTimesheetPK() {
+		return timesheetPK;
+	}
+
+	public void setTimesheetPK(TimesheetPK timesheetPK) {
+		this.timesheetPK = timesheetPK;
+	}
+
+	public Mission getMission() {
+		return mission;
+	}
+
+	public void setMission(Mission mission) {
+		this.mission = mission;
+	}
 
 	public Employe getEmploye() {
 		return employe;
