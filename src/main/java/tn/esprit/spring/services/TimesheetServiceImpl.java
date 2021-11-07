@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
@@ -17,10 +16,12 @@ import tn.esprit.spring.entities.TimesheetPK;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.repository.MissionRepository;
 import tn.esprit.spring.repository.TimesheetRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Service
 public class TimesheetServiceImpl implements ITimesheetService {
-	
+private static final Logger logger = LogManager.getLogger(TimesheetServiceImpl.class);	
 
 	@Autowired
 	MissionRepository missionRepository;
@@ -47,9 +48,10 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 	}
 
-	
-	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
-		System.out.println("In valider Timesheet");
+
+
+public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
+		logger.info("In valider Timesheet");
 		Employe validateur = employeRepository.findById(validateurId).get();
 		Mission mission = missionRepository.findById(missionId).get();
 		//verifier s'il est un chef de departement (interet des enum)
@@ -66,7 +68,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 			}
 		}
 		if(!chefDeLaMission){
-			System.out.println("l'employe doit etre chef de departement de la mission en question");
+			logger.info("l'employe doit etre chef de departement de la mission en question");
 			return;
 		}
 //
@@ -76,11 +78,13 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		//Comment Lire une date de la base de données
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		System.out.println("dateDebut : " + dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
-		
+		logger.info("dateDebut : " , dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
 	}
+public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
+			Date dateFin) {
 
-	
+		return (timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin));
+	}
 
 
 }
