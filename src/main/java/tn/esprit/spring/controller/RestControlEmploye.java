@@ -1,6 +1,7 @@
 package tn.esprit.spring.controller;
 
 import java.util.List;
+import java.util.Date;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ import tn.esprit.spring.dto.EmployeDTO;
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.services.IEmployeService;
-
+import tn.esprit.spring.entities.Mission;
+import tn.esprit.spring.entities.Timesheet;
 @RestController
 public class RestControlEmploye {
 	static final  Logger logger = Logger.getLogger(RestControlEmploye.class);
@@ -148,17 +150,6 @@ public class RestControlEmploye {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//JIHEN
 	// http://localhost:8081/SpringMVC/servlet/ajouterContrat
 	@PostMapping("/ajouterContrat")
@@ -191,5 +182,9 @@ public class RestControlEmploye {
 		
 	}
 
- 
+ //wissem
+	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
+			Date dateFin) {
+		return iemployeservice.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
+	}
 }
