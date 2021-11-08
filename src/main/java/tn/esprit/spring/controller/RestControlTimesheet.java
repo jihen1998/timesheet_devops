@@ -57,6 +57,31 @@ public class RestControlTimesheet {
 			itimesheetservice.affecterMissionADepartement(missionId, depId);
 
 		}
+	//wissem
+		// http://localhost:8081/SpringMVC/servlet/ajouterMission
+
+		@PostMapping("/ajouterMission")
+		@ResponseBody
+		public int ajouterMission(@RequestBody Mission mission) {
+			itimesheetservice.ajouterMission(mission);
+			return mission.getId();
+		}
+		
+		// URL : http://localhost:8081/SpringMVC/servlet/findAllMissionByEmployeJPQL/1
+	    @GetMapping(value = "findAllMissionByEmployeJPQL/{idemp}")
+	    @ResponseBody
+		public List<Mission> findAllMissionByEmployeJPQL(@PathVariable("idemp") int employeId) {
+
+			return itimesheetservice.findAllMissionByEmployeJPQL(employeId);
+		}
+
+	    // URL : http://localhost:8081/SpringMVC/servlet/getAllEmployeByMission/1
+	    @GetMapping(value = "getAllEmployeByMission/{idmission}")
+	    @ResponseBody
+		public List<Employe> getAllEmployeByMission(@PathVariable("idmission") int missionId) {
+
+			return itimesheetservice.getAllEmployeByMission(missionId);
+		}
 }
 	
 

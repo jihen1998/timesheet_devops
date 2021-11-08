@@ -4,6 +4,7 @@ package tn.esprit.spring.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -19,6 +20,9 @@ import tn.esprit.spring.exception.EmployeNotFoundException;
 import tn.esprit.spring.repository.ContratRepository;
 import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EmployeRepository;
+import tn.esprit.spring.entities.Mission;
+import tn.esprit.spring.entities.Timesheet;
+import tn.esprit.spring.repository.TimesheetRepository;
 
 @Service
 public class EmployeServiceImpl implements IEmployeService {
@@ -406,6 +410,17 @@ public List<Employe> getAllEmployes() {
 								logger.error("erreur d'ajout");}
 					return contrat.getReference();
 				}
+				
+			//wissem
+				
+			@Autowired
+			TimesheetRepository timesheetRepository;
+			
+			public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
+					Date dateFin) {
+				return timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
+			}
+
 				
 				
 	}
