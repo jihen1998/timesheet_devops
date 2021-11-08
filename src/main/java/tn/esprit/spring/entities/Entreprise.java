@@ -64,6 +64,28 @@ public class Entreprise implements Serializable{
 	public void setRaisonSocial(String raisonSocial) {
 		this.raisonSocial = raisonSocial;
 	}
+	//Departement
+	@OneToMany(mappedBy="entreprise", 
+			cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, 
+			fetch=FetchType.EAGER)
+	private List<Departement> departements = new ArrayList<>();
+
+	
+	
+	public List<Departement> getDepartements() {
+		return departements;
+	}
+
+	public void setDepartements(List<Departement> departements) {
+		this.departements = departements;
+	}
+	
+	
+	public void addDepartement(Departement departement){
+		departement.setEntreprise(this);
+		this.departements.add(departement);
+	}
+	
 
 	
 	

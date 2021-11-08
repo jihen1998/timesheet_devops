@@ -1,8 +1,12 @@
 package tn.esprit.spring.services;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +17,7 @@ import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.exception.ContratNotFoundException;
 import tn.esprit.spring.exception.EmployeNotFoundException;
 import tn.esprit.spring.repository.ContratRepository;
-
+import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 
 @Service
@@ -27,10 +31,45 @@ public class EmployeServiceImpl implements IEmployeService {
 	@Autowired
 	ContratRepository contratRepoistory;
 	
+	@Autowired
+	DepartementRepository deptRepoistory;
 	
 	
+	//Departement
+	@Transactional	
+	public void affecterEmployeADepartement(int employeId, int depId) {
+		Departement depManagedEntity = deptRepoistory.findById(depId).get();
+		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+
+		if(depManagedEntity.getEmployes() == null){
+
+			List<Employe> employes = new ArrayList<>();
+			employes.add(employeManagedEntity);
+			depManagedEntity.setEmployes(employes);
+		}else{
+
+			depManagedEntity.getEmployes().add(employeManagedEntity);
+
+		}
+
+	}
+	@Transactional
+	public void desaffecterEmployeDuDepartement(int employeId, int depId)
+	{
+		Departement dep = deptRepoistory.findById(depId).get();
+
+		int employeNb = dep.getEmployes().size();
+		for(int index = 0; index < employeNb; index++){
+			if(dep.getEmployes().get(index).getId() == employeId){
+				dep.getEmployes().remove(index);
+				break;//a revoir
+			}
+		}
+	}
 	
-	
+	public Double getSalaireMoyenByDepartementId(int departementId) {
+		return employeRepository.getSalaireMoyenByDepartementId(departementId);
+	}
 	
 	//SIWAR
 	

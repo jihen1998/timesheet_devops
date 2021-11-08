@@ -32,5 +32,10 @@ public interface IEmployeService {
 	public int ajouterContrat(Contrat contrat);
 	public List<Contrat> deleteAllContratJPQL();
 	public Contrat affecterContratAEmploye(int contratId, int employeId);
+
+	// FIRAS MANSOUR
+	public void affecterEmployeADepartement(int employeId, int depId);
+	public void desaffecterEmployeDuDepartement(int employeId, int depId);
+	public Double getSalaireMoyenByDepartementId(int departementId);
 	
 }

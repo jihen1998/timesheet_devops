@@ -16,4 +16,5 @@ public interface ITimesheetService {
 	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId);
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, 
 			Date dateDebut, Date dateFin);
+	public void affecterMissionADepartement(int missionId, int depId);
 }
