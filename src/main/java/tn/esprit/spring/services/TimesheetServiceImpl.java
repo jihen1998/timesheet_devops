@@ -13,6 +13,7 @@ import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.entities.Timesheet;
 import tn.esprit.spring.entities.TimesheetPK;
+import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.repository.MissionRepository;
 import tn.esprit.spring.repository.TimesheetRepository;
@@ -29,7 +30,18 @@ private static final Logger logger = LogManager.getLogger(TimesheetServiceImpl.c
 	TimesheetRepository timesheetRepository;
 	@Autowired
 	EmployeRepository employeRepository;
+	@Autowired
+	DepartementRepository deptRepoistory;
 	
+	//Departement
+	public void affecterMissionADepartement(int missionId, int depId) {
+		Mission mission = missionRepository.findById(missionId).get();
+		Departement dep = deptRepoistory.findById(depId).get();
+		mission.setDepartement(dep);
+		missionRepository.save(mission);
+		
+	}
+
 	
 		
 	
