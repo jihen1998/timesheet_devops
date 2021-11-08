@@ -98,5 +98,21 @@ public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mi
 		return (timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin));
 	}
 
+	//wissem
+	public int ajouterMission(Mission mission) {
+		missionRepository.save(mission);
+		return mission.getId();
+	}
+	
+	
+	public List<Mission> findAllMissionByEmployeJPQL(int employeId) {
+		return timesheetRepository.findAllMissionByEmployeJPQL(employeId);
+	}
+	
+	
+	public List<Employe> getAllEmployeByMission(int missionId) {
+		return timesheetRepository.getAllEmployeByMission(missionId);
+	}
+
 
 }
