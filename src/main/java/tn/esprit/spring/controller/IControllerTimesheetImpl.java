@@ -38,6 +38,24 @@ public class IControllerTimesheetImpl {
 		itimesheetservice.validerTimesheet(missionId, employeId, dateDebut, dateFin, validateurId);
 
 	}}
+	//wissem
+
+	public int ajouterMission(Mission mission) {
+		itimesheetservice.ajouterMission(mission);
+		return mission.getId();
+	}
 	
+	
+	
+	public List<Mission> findAllMissionByEmployeJPQL(int employeId) {
+	
+		return itimesheetservice.findAllMissionByEmployeJPQL(employeId);
+	}
+	
+	
+	public List<Employe> getAllEmployeByMission(int missionId) {
+	
+		return itimesheetservice.getAllEmployeByMission(missionId);
+	}
 
 

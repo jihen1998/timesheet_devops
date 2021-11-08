@@ -24503,3 +24503,47 @@ Caused by: java.net.UnknownHostException: mysql-standalone
 	...]
 2021-11-08 22:18:03.000  INFO 92356 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
 2021-11-08 22:18:03.335  INFO 92356 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-11-08 22:18:03.350  INFO 92356 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-11-08 22:18:03.425  INFO 92356 --- [restartedMain] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2021-11-08 22:18:03.597  INFO 92356 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-11-08 22:18:03.602  WARN 92356 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-11-08 22:18:03.683  INFO 92356 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path '/SpringMVC'
+2021-11-08 22:18:03.684  INFO 92356 --- [restartedMain] SpringBootCoreDataJpaMvcRest1Application : Started TimesheetSpringBootCoreDataJpaMvcRest1Application in 1.49 seconds (JVM running for 5994.667)
+2021-11-08 22:18:03.685  INFO 92356 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2021-11-08 22:30:53.924  INFO 92356 --- [Thread-16] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-11-08 22:30:53.959  INFO 92356 --- [Thread-16] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-11-08 22:30:54.009  INFO 92356 --- [Thread-16] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2021-11-08 22:30:54.057  INFO 92356 --- [Thread-16] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2021-11-08 22:30:54.887  INFO 92356 --- [restartedMain] SpringBootCoreDataJpaMvcRest1Application : Starting TimesheetSpringBootCoreDataJpaMvcRest1Application on LAPTOP-8UPRBO8E with PID 92356 (C:\Users\wissem\OneDrive\Bureau\aaaa\timesheet_devops\target\classes started by wissem in C:\Users\wissem\OneDrive\Bureau\aaaa\timesheet_devops)
+2021-11-08 22:30:54.888  INFO 92356 --- [restartedMain] SpringBootCoreDataJpaMvcRest1Application : No active profile set, falling back to default profiles: default
+2021-11-08 22:30:55.242  INFO 92356 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-08 22:30:55.283  INFO 92356 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40ms. Found 6 repository interfaces.
+2021-11-08 22:30:55.341  INFO 92356 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$beddc6ec] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-08 22:30:55.548  INFO 92356 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2021-11-08 22:30:55.550  INFO 92356 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-11-08 22:30:55.550  INFO 92356 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2021-11-08 22:30:55.568  INFO 92356 --- [restartedMain] o.a.c.c.C.[.[localhost].[/SpringMVC]     : Initializing Spring embedded WebApplicationContext
+2021-11-08 22:30:55.568  INFO 92356 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 678 ms
+2021-11-08 22:30:55.640  INFO 92356 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2021-11-08 22:30:55.663  INFO 92356 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2021-11-08 22:30:55.680  INFO 92356 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2021-11-08 22:30:55.725  INFO 92356 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-11-08 22:30:56.185  INFO 92356 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-11-08 22:30:56.198  INFO 92356 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-11-08 22:30:56.254  INFO 92356 --- [restartedMain] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2021-11-08 22:30:56.348  WARN 92356 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'IControllerTimesheetImpl' defined in file [C:\Users\wissem\OneDrive\Bureau\aaaa\timesheet_devops\target\classes\tn\esprit\spring\controller\IControllerTimesheetImpl.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [tn.esprit.spring.controller.IControllerTimesheetImpl]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	Syntax error on token "}", delete this token
+	The method ajouterMission(Mission) is undefined for the type ITimesheetService
+	The method findAllMissionByEmployeJPQL(int) is undefined for the type ITimesheetService
+	The method getAllEmployeByMission(int) is undefined for the type ITimesheetService
+	Syntax error, insert "}" to complete ClassBody
+
+2021-11-08 22:30:56.349  INFO 92356 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-11-08 22:30:56.349  INFO 92356 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2021-11-08 22:30:56.353  INFO 92356 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2021-11-08 22:30:56.353  INFO 92356 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-11-08 22:30:56.363  INFO 92356 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
