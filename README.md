@@ -1,2 +1,2 @@
 # timesheet_devops
-timesheet devops
+project timesheet devops .

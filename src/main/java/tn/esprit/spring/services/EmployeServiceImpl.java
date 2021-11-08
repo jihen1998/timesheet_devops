@@ -2,11 +2,8 @@ package tn.esprit.spring.services;
 
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
-
 import org.apache.log4j.LogManager;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +26,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	
 	@Autowired
 	ContratRepository contratRepoistory;
+	
 	
 	
 	
@@ -84,7 +82,7 @@ public class EmployeServiceImpl implements IEmployeService {
 		logger.info("mis a jour sans erreur");
 		}catch (Exception e) {
 			logger.error("Erreur avec la  mis a jour   email " +e);
-			msg="error";
+			msg="c est un erreur";
 		}
 		return msg;
 	}
@@ -289,6 +287,7 @@ public List<Employe> getAllEmployes() {
 	}
 
 	
+	
 
 	//JIHEN 
 			public List<Contrat> deleteAllContratJPQL() {
@@ -315,12 +314,12 @@ public List<Employe> getAllEmployes() {
 					  }
 				  try{	
 					  contratRepoistory.delete(contratManagedEntity);
-					  c="success";
+					  c="success Delete Contrat";
 					  logger.info("la surpression est realise avec succés");
 						}
 					catch(Exception e){			
 						logger.error("erreur lors de la suppression");
-						c="error";
+						c="error Delete contrat";
 					   }
 				  return c;
 			}

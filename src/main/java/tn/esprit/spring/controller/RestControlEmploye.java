@@ -1,7 +1,8 @@
 package tn.esprit.spring.controller;
-import java.util.List;
 
+import java.util.List;
 import org.apache.log4j.Logger;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.dto.ContratDTO;
+import tn.esprit.spring.dto.EmployeDTO;
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.services.IEmployeService;
@@ -22,20 +24,33 @@ public class RestControlEmploye {
 	static final  Logger logger = Logger.getLogger(RestControlEmploye.class);
 	@Autowired
 	IEmployeService iemployeservice;
+	  @Autowired
+	    private ModelMapper modelMapper;
+	
 
 	//SIWAR
 	
 	// http://localhost:8081/SpringMVC/servlet/ajouterEmployer
 		
 		
-		@PostMapping("/ajouterEmployer")
+	  @PostMapping("/ajouterEmployer")
 		@ResponseBody
-		public Employe ajouterEmploye(@RequestBody Employe employe)
+		public int ajouterEmploye(@RequestBody EmployeDTO employeDTO)
 		{
-			iemployeservice.ajouterEmploye(employe);
+		  Employe employe = modelMapper.map(employeDTO,Employe.class);
+			return iemployeservice.ajouterEmploye(employe);
 			
-			return employe;
 		}
+
+	  
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		// Modifier email : http://localhost:8081/SpringMVC/servlet/modifyEmail/1/newemail
 		@PutMapping(value = "/modifyEmail/{id}/{newemail}") 
