@@ -17,4 +17,9 @@ public interface ITimesheetService {
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, 
 			Date dateDebut, Date dateFin);
 	public void affecterMissionADepartement(int missionId, int depId);
+	
+	//wissem
+	public int ajouterMission(Mission mission);
+	public List<Mission> findAllMissionByEmployeJPQL(int employeId);
+	public List<Employe> getAllEmployeByMission(int missionId);
 }
