@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
@@ -36,9 +37,12 @@ public class TimesheetTest {
 	
 	private static final Logger l = LogManager.getLogger(TimesheetTest.class);
 	
+	
+	
 	@Autowired
 	ITimesheetService timeSheetService;
 	
+	//@MockBean
 	@Autowired
 	EmployeRepository employeRepository;
 	@Autowired
@@ -52,15 +56,15 @@ public class TimesheetTest {
 	public void testAjouterTimeSheet() throws ParseException {
 		Employe emp = new Employe(1, "bjaoui", "wael", "wael@g.com", true, Role.CHEF_DEPARTEMENT);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date dateDebut = dateFormat.parse("2021-05-08");
-		Date dateFin = dateFormat.parse("2021-12-02");
+		Date dateDebut = dateFormat.parse("2021-07-08");
+		Date dateFin = dateFormat.parse("2021-08-02");
 		
 		assertNotNull(employeRepository.save(emp).getId());
 		try {
 			l.info("In AjouterTimeSheet() : ");
 			l.debug("lancer ajoutTimeSheet");
 			timeSheetService.ajouterTimesheet(1, 1, dateDebut, dateFin);
-			//employerService.deleteEmployeById(1);
+			
 		} catch (Exception e) {
 			l.error("Erreur dans AjouterTimeSheet() :" + e);
 		}
@@ -74,7 +78,7 @@ public class TimesheetTest {
 		try {
 			l.info("In ValiderTimeSheet() : ");
 			l.debug("lancer methode");
-			timeSheetService.validerTimesheet(1, 1, new Date(), new Date("2021-09-12"), 1);
+			timeSheetService.validerTimesheet(1, 1, new Date(), new Date(), 1);
 		} catch (Exception e) {
 			l.error("Erreur dans ValiderTimeSheet() :" + e);
 		}
