@@ -80,11 +80,7 @@ public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		logger.info("dateDebut : " , dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
 	}
-public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
-			Date dateFin) {
 
-		return (timesheetRepository.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin));
-	}
 
 
 }
