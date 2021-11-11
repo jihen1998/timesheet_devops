@@ -1,7 +1,8 @@
 package tn.esprit.spring.controller;
-import java.util.List;
 
+import java.util.List;
 import org.apache.log4j.Logger;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.dto.ContratDTO;
+import tn.esprit.spring.dto.EmployeDTO;
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.services.IEmployeService;
@@ -22,20 +24,55 @@ public class RestControlEmploye {
 	static final  Logger logger = Logger.getLogger(RestControlEmploye.class);
 	@Autowired
 	IEmployeService iemployeservice;
+	  @Autowired
+	    private ModelMapper modelMapper;
+	  
+	  
+	//Departement
+	  
+	  // http://localhost:8081/SpringMVC/servlet/affecterEmployeADepartement/1/1
+		@PutMapping(value = "/affecterEmployeADepartement/{idemp}/{iddept}") 
+		public void affecterEmployeADepartement(@PathVariable("idemp")int employeId, @PathVariable("iddept")int depId) {
+			iemployeservice.affecterEmployeADepartement(employeId, depId);
+			
+		}           
+		// http://localhost:8081/SpringMVC/servlet/desaffecterEmployeDuDepartement/1/1
+		@PutMapping(value = "/desaffecterEmployeDuDepartement/{idemp}/{iddept}") 
+		public void desaffecterEmployeDuDepartement(@PathVariable("idemp")int employeId, @PathVariable("iddept")int depId)
+		{
+			iemployeservice.desaffecterEmployeDuDepartement(employeId, depId);
+		}
+		
+		// URL : http://localhost:8081/SpringMVC/servlet/getSalaireMoyenByDepartementId/2
+	    @GetMapping(value = "getSalaireMoyenByDepartementId/{iddept}")
+	    @ResponseBody
+		public Double getSalaireMoyenByDepartementId(@PathVariable("iddept")int departementId) {
+			return iemployeservice.getSalaireMoyenByDepartementId(departementId);
+		}
 
 	//SIWAR
 	
 	// http://localhost:8081/SpringMVC/servlet/ajouterEmployer
 		
 		
-		@PostMapping("/ajouterEmployer")
+	  @PostMapping("/ajouterEmployer")
 		@ResponseBody
-		public Employe ajouterEmploye(@RequestBody Employe employe)
+		public int ajouterEmploye(@RequestBody EmployeDTO employeDTO)
 		{
-			iemployeservice.ajouterEmploye(employe);
+		  Employe employe = modelMapper.map(employeDTO,Employe.class);
+			return iemployeservice.ajouterEmploye(employe);
 			
-			return employe;
 		}
+
+	  
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		// Modifier email : http://localhost:8081/SpringMVC/servlet/modifyEmail/1/newemail
 		@PutMapping(value = "/modifyEmail/{id}/{newemail}") 
@@ -51,13 +88,23 @@ public class RestControlEmploye {
 		   public String getEmployePrenomById(@PathVariable("idemp")int employeId) {
 				return iemployeservice.getEmployePrenomById(employeId);
 			}
-
-		    // URL : http://localhost:8081/SpringMVC/servlet/deleteEmployeById/1
+		   
+		   
+		   /**
+		   // URL : http://localhost:8081/SpringMVC/servlet/deleteEmployeById/1
 		    @DeleteMapping("/deleteEmployeById/{idemp}") 
 			@ResponseBody 
 			public void deleteEmployeById(@PathVariable("idemp")int employeId) {
 		    	
 				iemployeservice.deleteEmployeById(employeId);
+				
+			}
+		 */
+		    @DeleteMapping("/deleteEmployeById/{idemp}") 
+			@ResponseBody 
+			public void deleteEmployeById(@PathVariable("idemp")int employeId) {
+		    	
+				iemployeservice.deleteEmploye(employeId);
 				
 			}
 		

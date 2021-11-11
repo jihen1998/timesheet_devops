@@ -34,7 +34,21 @@ public class IControllerEmployeImpl  {
 		iemployeservice.deleteAllContratJPQL();
 		
 	}
+	//Departement
+	public void affecterEmployeADepartement(int employeId, int depId) {
+		iemployeservice.affecterEmployeADepartement(employeId, depId);
+		
+	}
 
+	public void desaffecterEmployeDuDepartement(int employeId, int depId)
+	{
+		iemployeservice.desaffecterEmployeDuDepartement(employeId, depId);
+	}
+
+	public Double getSalaireMoyenByDepartementId(int departementId) {
+		// TODO Auto-generated method stub
+		return iemployeservice.getSalaireMoyenByDepartementId(departementId);
+	}
 	
 	
 

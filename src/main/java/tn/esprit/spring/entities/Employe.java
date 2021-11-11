@@ -6,13 +6,16 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -37,9 +40,9 @@ public class Employe implements Serializable {
 	//@NotNull
 	private Role role;
 	
-	//@JsonBackReference  
+	@JsonBackReference  
 	@JsonIgnore
-	@ManyToMany(mappedBy="employes",fetch=FetchType.EAGER )
+	@ManyToMany(   mappedBy="employes" , cascade = CascadeType.ALL, fetch=FetchType.EAGER )
 	//@NotNull
 	private List<Departement> departements;
 	
@@ -53,11 +56,9 @@ public class Employe implements Serializable {
 	@OneToMany(mappedBy="employe")
 	private List<Timesheet> timesheets;
 	
+
 	
 	
-	
-	public Employe() {
-		super();}
 	
 
 
@@ -72,6 +73,30 @@ public class Employe implements Serializable {
 	}
 	
 	
+
+	public Employe() {
+		
+	}
+
+
+
+	
+
+
+
+	public Employe(String nom2, String prenom2, Role role2) {
+		
+	}
+
+
+
+	public Employe(String emailDTO, String nomDTO, String prenomDTO, Contrat contratDTO) {
+		
+	}
+
+
+
+
 
 	public int getId() {
 		return id;
