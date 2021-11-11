@@ -2,7 +2,6 @@ package tn.esprit.spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.repository.EntrepriseRepository;
@@ -21,13 +20,13 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 	@Override
 	public void deleteEntrepriseById(int entrepriseId) {
-		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());
+		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).orElse(new Entreprise()));
 		
 	}
 
 	@Override
 	public Entreprise getEntrepriseById(int entrepriseId) {
-		return entrepriseRepoistory.findById(entrepriseId).get();
+		return entrepriseRepoistory.findById(entrepriseId).orElse(new Entreprise());
 	}
 	
 	

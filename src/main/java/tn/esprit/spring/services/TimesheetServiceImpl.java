@@ -2,7 +2,6 @@ package tn.esprit.spring.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,10 +52,10 @@ private static final Logger logger = LogManager.getLogger(TimesheetServiceImpl.c
 public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
 		logger.info("In valider Timesheet");
 		Employe validateur = employeRepository.findById(validateurId).get();
-		Mission mission = missionRepository.findById(missionId).get();
+		Mission mission = missionRepository.findById(missionId).orElse(null);
 		
 		if(!validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
-			System.out.println("l'employe doit etre chef de departement pour valider une feuille de temps !");
+			logger.info("l'employe doit etre chef de departement pour valider une feuille de temps !");
 			return;
 		}
 		

@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
@@ -42,8 +41,7 @@ public class TimesheetTest {
 	@Autowired
 	ITimesheetService timeSheetService;
 	
-	//@MockBean
-	@Autowired
+	@Autowired	
 	EmployeRepository employeRepository;
 	@Autowired
 	IEmployeService employerService;
@@ -60,6 +58,7 @@ public class TimesheetTest {
 		Date dateFin = dateFormat.parse("2021-08-02");
 		
 		assertNotNull(employeRepository.save(emp).getId());
+ 
 		try {
 			l.info("In AjouterTimeSheet() : ");
 			l.debug("lancer ajoutTimeSheet");
@@ -75,6 +74,7 @@ public class TimesheetTest {
 	
 	@Test
 	public void testValiderTimeSheet() {
+		Employe emp = new Employe(1, "bjaoui", "wael", "wael@g.com", true, Role.CHEF_DEPARTEMENT); //cor1
 		try {
 			l.info("In ValiderTimeSheet() : ");
 			l.debug("lancer methode");
