@@ -42,7 +42,6 @@ stage("Build") {
 			
   stage('Docker : Build image') {
 steps {
-   
 script {
    dockerImage = docker.build registry}}}
 stage('Docker : Push image') {
